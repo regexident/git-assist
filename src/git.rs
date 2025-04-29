@@ -1,9 +1,10 @@
 use git2::{Commit as GitCommit, Error as GitError, Oid, Repository as GitRepository};
 
-pub(crate) fn commits_of_branch<'a>(
-    repository: &'a GitRepository,
+#[allow(dead_code)]
+pub(crate) fn commits_of_branch(
+    repository: &GitRepository,
     branch: Oid,
-) -> Result<Vec<GitCommit<'a>>, GitError> {
+) -> Result<Vec<GitCommit<'_>>, GitError> {
     let mut revwalk = repository.revwalk()?;
 
     revwalk.push(branch)?;
@@ -16,10 +17,10 @@ pub(crate) fn commits_of_branch<'a>(
         .collect())
 }
 
-pub(crate) fn commits_in_range<'a>(
-    repository: &'a GitRepository,
+pub(crate) fn commits_in_range(
+    repository: &GitRepository,
     range: (Oid, Oid),
-) -> Result<Vec<GitCommit<'a>>, GitError> {
+) -> Result<Vec<GitCommit<'_>>, GitError> {
     let mut revwalk = repository.revwalk()?;
 
     revwalk.hide(range.0)?;

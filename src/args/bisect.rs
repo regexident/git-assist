@@ -48,7 +48,7 @@ enum RepositoryUrlChoice<'a> {
     Custom,
 }
 
-impl<'a> std::fmt::Display for RepositoryUrlChoice<'a> {
+impl std::fmt::Display for RepositoryUrlChoice<'_> {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             RepositoryUrlChoice::Remote(remote) => {
@@ -72,9 +72,7 @@ impl SkipPullRequestsCommand {
         };
 
         skip_pull_requests(&*host, &config)
-            .await
-            .map_err(anyhow::Error::from)
-    }
+            .await}
 
     fn as_config(&self) -> anyhow::Result<SkipPullRequestsConfig> {
         let directory = match &self.directory {
