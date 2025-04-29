@@ -196,7 +196,7 @@ fn request_personal_token() -> anyhow::Result<GithubAuthentication> {
             .prompt()
             .map_err(anyhow::Error::from)?;
 
-        SecretString::from_str(&string).map_err(anyhow::Error::from)?
+        SecretString::from(string)
     };
 
     Ok(GithubAuthentication::PersonalToken(personal_token))
@@ -232,7 +232,7 @@ fn request_oauth() -> anyhow::Result<GithubAuthentication> {
             .prompt()
             .map_err(anyhow::Error::from)?;
 
-        SecretString::from_str(&string).map_err(anyhow::Error::from)?
+        SecretString::from(string)
     };
 
     let token_type = Text::new("Token type:").prompt()?;
@@ -245,8 +245,8 @@ fn request_oauth() -> anyhow::Result<GithubAuthentication> {
 
     Ok(GithubAuthentication::OAuth(octocrab::auth::OAuth {
         access_token,
-        token_type,
         scope,
+        token_type,
     }))
 }
 
@@ -260,7 +260,7 @@ fn request_user_access_token() -> anyhow::Result<GithubAuthentication> {
             .prompt()
             .map_err(anyhow::Error::from)?;
 
-        SecretString::from_str(&string).map_err(anyhow::Error::from)?
+        SecretString::from(string)
     };
 
     Ok(GithubAuthentication::UserAccessToken(personal_token))
