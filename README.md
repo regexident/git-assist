@@ -43,7 +43,7 @@ Options:
 
 Most options can either be passed as command-line arguments or entered interactively, later on.
 
-Why is the `skip-pull-requests`` sub-command useful?
+Why is the `skip-pull-requests` sub-command useful?
 
 Github supports three merging schemes:
 
