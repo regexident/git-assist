@@ -245,6 +245,9 @@ fn request_oauth() -> anyhow::Result<GithubAuthentication> {
 
     Ok(GithubAuthentication::OAuth(octocrab::auth::OAuth {
         access_token,
+        expires_in: None,
+        refresh_token_expires_in: None,
+        refresh_token: None,
         scope,
         token_type,
     }))
