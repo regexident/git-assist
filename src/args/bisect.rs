@@ -71,8 +71,8 @@ impl SkipPullRequestsCommand {
             SupportedHost::Github => Box::new(GithubApi::authenticated()?),
         };
 
-        skip_pull_requests(&*host, &config)
-            .await}
+        skip_pull_requests(&*host, &config).await
+    }
 
     fn as_config(&self) -> anyhow::Result<SkipPullRequestsConfig> {
         let directory = match &self.directory {
