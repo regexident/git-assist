@@ -37,7 +37,7 @@ Please make sure to add your changes to the appropriate categories:
   - `secrecy` from `0.8.0` to `0.10.3`
   - `serde` from `1.0.186` to `1.0.219`
   - `shellexpand` from `3.1.0` to `3.1.1`
-  - `thiserror` from `1.0.44` to `1.0.69`
+  - `thiserror` from `1.0.44` to `2.0.0`
   - `tokio` from `1.31.0` to `1.45.0`
 
 ### Deprecated
