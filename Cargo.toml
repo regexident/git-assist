@@ -1,6 +1,7 @@
 [package]
 name = "git-assist"
 description = "A suite of friendly assistive git commands"
+repository = "https://github.com/regexident/git-assist"
 categories = ["command-line-utilities"]
 keywords = ["git", "bisect"]
 license = "MPL-2.0"
