@@ -24,12 +24,7 @@ Please make sure to add your changes to the appropriate categories:
 
 ### Changed
 
-- Updated dependencies:
-  - `clap` from `4.5.37` to `4.5.39`
-  - `git2` from `0.20.2` to `0.20.2`
-  - `octocrab` from `0.44.1` to `0.44.1`
-  - `openssl` from `0.10.72` to `0.10.73`
-  - `tokio` from `1.45.0` to `1.45.1`
+- n/a
 
 ### Deprecated
 
@@ -54,6 +49,17 @@ Please make sure to add your changes to the appropriate categories:
 ### Other
 
 - n/a
+
+## [0.2.1] - 2025-06-05
+
+### Changed
+
+- Updated dependencies:
+  - `clap` from `4.5.37` to `4.5.39`
+  - `git2` from `0.20.2` to `0.20.2`
+  - `octocrab` from `0.44.1` to `0.44.1`
+  - `openssl` from `0.10.72` to `0.10.73`
+  - `tokio` from `1.45.0` to `1.45.1`
 
 ## [0.2.0] - 2025-05-10
 
