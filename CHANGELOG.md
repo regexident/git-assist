@@ -55,6 +55,17 @@ Please make sure to add your changes to the appropriate categories:
 
 - n/a
 
+## [0.2.2] - 2025-06-25
+
+### Changed
+
+- Updated dependencies:
+  - `clap` from `4.5.37` to `4.5.40`
+  - `git2` from `0.20.2` to `0.20.2`
+  - `octocrab` from `0.44.1` to `0.44.1`
+  - `openssl` from `0.10.72` to `0.10.73`
+  - `tokio` from `1.45.0` to `1.45.1`
+
 ## [0.2.1] - 2025-06-05
 
 ### Changed
