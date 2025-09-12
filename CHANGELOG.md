@@ -25,11 +25,14 @@ Please make sure to add your changes to the appropriate categories:
 ### Changed
 
 - Updated dependencies:
-  - `clap` from `4.5.37` to `4.5.40`
+  - `anyhow` from `1.0.98` to `1.0.99`
+  - `async-trait` from `0.1.88` to `0.1.89`
+  - `clap` from `4.5.37` to `4.5.47`
   - `git2` from `0.20.2` to `0.20.2`
   - `octocrab` from `0.44.1` to `0.44.1`
   - `openssl` from `0.10.72` to `0.10.73`
-  - `tokio` from `1.45.0` to `1.45.1`
+  - `time` from `0.3.41` to `0.3.43`
+  - `tokio` from `1.45.0` to `1.47.1`
 
 ### Deprecated
 
