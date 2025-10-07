@@ -18,7 +18,7 @@ impl TryFrom<&GitUrl> for SupportedHost {
     type Error = anyhow::Error;
 
     fn try_from(url: &GitUrl) -> Result<Self, Self::Error> {
-        match url.host.as_deref() {
+        match url.host() {
             Some(GITHUB_HOST) => {
                 if cfg!(feature = "github") {
                     Ok(SupportedHost::Github)

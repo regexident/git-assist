@@ -34,6 +34,7 @@ num-bigint = ">=0.4.6" # fixes breakage in octocrab
 time = ">=0.3.41" # fixes breakage in octocrab
 serde = ">=1.0.185" # fixes breakage in octocrab
 openssl = ">=0.10.72" # fixes breakage in git2
+getset = ">=0.1.6" # fixes breakage in git-url-parse
 
 [features]
 default = ["github"]
