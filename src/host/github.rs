@@ -1,7 +1,7 @@
 use std::str::FromStr;
 
 use async_trait::async_trait;
-
+use git_url_parse::types::provider::GenericProvider;
 use inquire::{Password, PasswordDisplayMode, Select, Text};
 use jsonwebtoken::EncodingKey;
 use octocrab::{
@@ -52,7 +52,7 @@ impl TryFrom<GitRepositoryUrl> for GithubRepository {
 
     fn try_from(repository: GitRepositoryUrl) -> Result<Self, anyhow::Error> {
         let url = &repository.url_string;
-        match repository.parsed_url.host.as_deref() {
+        match repository.parsed_url.host() {
             Some(GITHUB_HOST) => {}
             Some(_) => {
                 anyhow::bail!("Not a Github url: {url:?}", url = url.to_string());
@@ -67,12 +67,14 @@ impl TryFrom<GitRepositoryUrl> for GithubRepository {
 }
 
 impl GithubRepository {
-    pub fn owner(&self) -> &str {
-        self.0.parsed_url.owner.as_deref().unwrap()
+    pub fn owner(&self) -> Result<String, anyhow::Error> {
+        let provider: GenericProvider = self.0.parsed_url.provider_info()?;
+        Ok(provider.owner().clone())
     }
 
-    pub fn name(&self) -> &str {
-        &self.0.parsed_url.name
+    pub fn name(&self) -> Result<String, anyhow::Error> {
+        let provider: GenericProvider = self.0.parsed_url.provider_info()?;
+        Ok(provider.repo().clone())
     }
 }
 
@@ -88,7 +90,7 @@ impl GitHost for GithubApi {
             .api
             .all_pages(
                 self.api
-                    .pulls(safe_repository.owner(), safe_repository.name())
+                    .pulls(safe_repository.owner()?, safe_repository.name()?)
                     .list()
                     .state(State::Closed)
                     .sort(Sort::Created)
