@@ -24,7 +24,14 @@ Please make sure to add your changes to the appropriate categories:
 
 ### Changed
 
-- n/a
+- Updated dependencies:
+  - `anyhow` from `1.0.99` to `1.0.100`
+  - `clap` from `4.5.47` to `4.5.48`
+  - `git-url-parse` from `0.4.5` to `0.6.0`
+  - `inquire` from `0.7.5` to `0.9.0`
+  - `octocrab` from `0.44.0` to `0.46.0`
+  - `serde` from `1.0.219` to `1.0.228`
+  - `time` from `0.3.43` to `0.3.44`
 
 ### Deprecated
 
