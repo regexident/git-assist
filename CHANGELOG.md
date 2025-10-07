@@ -24,16 +24,7 @@ Please make sure to add your changes to the appropriate categories:
 
 ### Changed
 
-- Updated dependencies:
-  - `anyhow` from `1.0.99` to `1.0.100`
-  - `clap` from `4.5.47` to `4.5.48`
-  - `git-url-parse` from `0.4.5` to `0.6.0`
-  - `inquire` from `0.7.5` to `0.9.0`
-  - `octocrab` from `0.44.0` to `0.46.0`
-  - `serde` from `1.0.219` to `1.0.228`
-  - `thiserror` from `1.0.44` to `2.0.0`
-  - `time` from `0.3.43` to `0.3.44`
-- Bumped MSRV from `1.81.0` to `1.85.0`
+- n/a
 
 ### Deprecated
 
@@ -58,6 +49,21 @@ Please make sure to add your changes to the appropriate categories:
 ### Other
 
 - n/a
+
+## [0.3.0] - 2025-10-07
+
+### Changed
+
+- Updated dependencies:
+  - `anyhow` from `1.0.99` to `1.0.100`
+  - `clap` from `4.5.47` to `4.5.48`
+  - `git-url-parse` from `0.4.5` to `0.6.0`
+  - `inquire` from `0.7.5` to `0.9.0`
+  - `octocrab` from `0.44.0` to `0.46.0`
+  - `serde` from `1.0.219` to `1.0.228`
+  - `thiserror` from `1.0.44` to `2.0.0`
+  - `time` from `0.3.43` to `0.3.44`
+- Bumped MSRV from `1.81.0` to `1.85.0`
 
 ## [0.2.3] - 2025-09-12
 
