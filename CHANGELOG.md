@@ -32,6 +32,7 @@ Please make sure to add your changes to the appropriate categories:
   - `octocrab` from `0.44.0` to `0.46.0`
   - `serde` from `1.0.219` to `1.0.228`
   - `time` from `0.3.43` to `0.3.44`
+- Bumped MSRV from `1.81.0` to `1.85.0`
 
 ### Deprecated
 
