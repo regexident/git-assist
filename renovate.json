@@ -4,9 +4,16 @@
     "packageRules": [
         {
             "allowedVersions": "!/^=/",
+            "matchDepTypes": ["dependencies", "dev-dependencies"],
+            "matchUpdateTypes": ["major"],
+            "matchPackageNames": ["*"]
+        },
+        {
+            "allowedVersions": "!/^=/",
             "groupName": "dependencies",
             "groupSlug": "dependencies",
             "matchDepTypes": ["dependencies"],
+            "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
             "matchPackageNames": ["*"]
         },
         {
@@ -14,6 +21,7 @@
             "groupName": "dev-dependencies",
             "groupSlug": "dev-dependencies",
             "matchDepTypes": ["dev-dependencies"],
+            "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
             "matchPackageNames": ["*"]
         },
         {
