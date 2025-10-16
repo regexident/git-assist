@@ -24,7 +24,14 @@ Please make sure to add your changes to the appropriate categories:
 
 ### Changed
 
-- n/a
+- Updated dependencies:
+  - `anyhow` from `1.0.99` -> `1.0.100`
+  - `clap` from `4.5.47` -> `4.5.49`
+  - `octocrab` from `0.46.0` -> `0.47.0`
+  - `openssl` from `0.10.73` -> `0.10.74`
+  - `serde` from `1.0.219` -> `1.0.228`
+  - `time` from `0.3.43` -> `0.3.44`
+  - `tokio` from `1.47.1` -> `1.48.0`
 
 ### Deprecated
 
