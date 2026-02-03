@@ -29,12 +29,15 @@ shellexpand = "3.1.1"
 jsonwebtoken = { version = "9.3.1", optional = true }
 octocrab = { version = "0.47.0", features = ["stream"], optional = true }
 
-# Breakage fixes
-num-bigint = ">=0.4.6" # fixes breakage in octocrab
-time = ">=0.3.41" # fixes breakage in octocrab
-serde = ">=1.0.185" # fixes breakage in octocrab
-openssl = ">=0.10.72" # fixes breakage in git2
-getset = ">=0.1.6" # fixes breakage in git-url-parse
+# Transitive dependency version constraints to ensure minimal-versions compatibility:
+# These pins ensure that when cargo resolves minimal versions (cargo minimal-versions),
+# the selected versions are actually compatible. Without these constraints, cargo would
+# select older versions that fail to compile with current Rust or have incompatible APIs.
+num-bigint = ">=0.4.6" # Older versions have compilation errors with current Rust
+time = ">=0.3.41" # Required for chrono/jsonwebtoken compatibility
+serde = ">=1.0.185" # Required for octocrab and related crates
+openssl = ">=0.10.72" # Older versions have build script failures
+getset = ">=0.1.6" # Required for git-url-parse compatibility
 
 [features]
 default = ["github"]
