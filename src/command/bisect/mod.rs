@@ -1,3 +1,5 @@
+mod config;
+
 use std::{
     collections::HashSet,
     os::unix::process::ExitStatusExt,
@@ -11,6 +13,8 @@ use crate::{
     git::commits_in_range,
     host::{GitHost, GitPullRequest, GitRepositoryUrl},
 };
+
+pub use config::SkipPullRequestsConfigBuilder;
 
 pub struct SkipPullRequestsConfig {
     /// The git repository.
