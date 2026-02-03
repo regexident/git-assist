@@ -24,14 +24,7 @@ Please make sure to add your changes to the appropriate categories:
 
 ### Changed
 
-- Updated dependencies:
-  - `anyhow` from `1.0.99` -> `1.0.100`
-  - `clap` from `4.5.47` -> `4.5.49`
-  - `octocrab` from `0.46.0` -> `0.47.0`
-  - `openssl` from `0.10.73` -> `0.10.74`
-  - `serde` from `1.0.219` -> `1.0.228`
-  - `time` from `0.3.43` -> `0.3.44`
-  - `tokio` from `1.47.1` -> `1.48.0`
+- n/a
 
 ### Deprecated
 
@@ -43,12 +36,7 @@ Please make sure to add your changes to the appropriate categories:
 
 ### Fixed
 
-- Fixed inverted dry-run logic in bisect command.
-- Removed duplicate log message in bisect command.
-- Replaced panic-prone unwraps with proper error handling in "git.rs".
-- Improved error handling by logging warnings and replacing panics with proper error propagation.
-- Simplified error messages in "github.rs" by removing redundant format parameters.
-- Improved GitHub authentication UX with environment variable support.
+- n/a
 
 ### Performance
 
@@ -61,6 +49,28 @@ Please make sure to add your changes to the appropriate categories:
 ### Other
 
 - n/a
+
+## [0.3.1] - 2026-02-03
+
+### Changed
+
+- Updated dependencies:
+  - `anyhow` from `1.0.99` -> `1.0.100`
+  - `clap` from `4.5.47` -> `4.5.49`
+  - `octocrab` from `0.46.0` -> `0.47.0`
+  - `openssl` from `0.10.73` -> `0.10.74`
+  - `serde` from `1.0.219` -> `1.0.228`
+  - `time` from `0.3.43` -> `0.3.44`
+  - `tokio` from `1.47.1` -> `1.48.0`
+
+### Fixed
+
+- Fixed inverted dry-run logic in bisect command.
+- Removed duplicate log message in bisect command.
+- Replaced panic-prone unwraps with proper error handling in "git.rs".
+- Improved error handling by logging warnings and replacing panics with proper error propagation.
+- Simplified error messages in "github.rs" by removing redundant format parameters.
+- Improved GitHub authentication UX with environment variable support.
 
 ## [0.3.0] - 2025-10-07
 
