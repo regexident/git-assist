@@ -85,7 +85,15 @@ impl SkipPullRequestsCommand {
         let remotes: Vec<GitRemote<'_>> = repository
             .remotes()?
             .into_iter()
-            .filter_map(|name| name.and_then(|name| repository.find_remote(name).ok()))
+            .filter_map(|name| {
+                name.and_then(|name| match repository.find_remote(name) {
+                    Ok(remote) => Some(remote),
+                    Err(err) => {
+                        eprintln!("Warning: Failed to find remote '{name}': {err}");
+                        None
+                    }
+                })
+            })
             .collect();
 
         let url = match &self.remote_url {
@@ -97,7 +105,10 @@ impl SkipPullRequestsCommand {
                 let choice = Select::new("Remote url:", choices).prompt()?;
 
                 match choice {
-                    RepositoryUrlChoice::Remote(remote) => remote.url().unwrap().to_owned(),
+                    RepositoryUrlChoice::Remote(remote) => remote
+                        .url()
+                        .ok_or_else(|| anyhow::anyhow!("Remote has no URL configured"))?
+                        .to_owned(),
                     RepositoryUrlChoice::Custom => Text::new("Remote url:").prompt()?,
                 }
             }

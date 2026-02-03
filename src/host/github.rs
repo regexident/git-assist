@@ -161,7 +161,7 @@ fn pick_authentication() -> anyhow::Result<GithubAuthentication> {
     let index = auth_labels
         .into_iter()
         .position(|label| label == authentication)
-        .expect("Should be unreachable");
+        .ok_or_else(|| anyhow::anyhow!("Selected authentication method not found in list"))?;
 
     match auth_kinds[index] {
         AuthKind::None => request_no_auth(),
