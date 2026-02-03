@@ -126,37 +126,50 @@ impl GitHost for GithubApi {
 }
 
 fn pick_authentication() -> anyhow::Result<GithubAuthentication> {
+    // Check for GITHUB_TOKEN environment variable first
+    if let Ok(token) = std::env::var("GITHUB_TOKEN") {
+        if !token.is_empty() {
+            println!("Using GITHUB_TOKEN from environment");
+            return Ok(GithubAuthentication::PersonalToken(SecretString::from(
+                token,
+            )));
+        }
+    }
+
     enum AuthKind {
-        None,
-        Basic,
         PersonalToken,
+        None,
+        UserAccessToken,
+        Basic,
         App,
         OAuth,
-        UserAccessToken,
     }
 
     let auth_kinds = [
-        AuthKind::None,
-        AuthKind::Basic,
         AuthKind::PersonalToken,
+        AuthKind::None,
+        AuthKind::UserAccessToken,
+        AuthKind::Basic,
         AuthKind::App,
         AuthKind::OAuth,
-        AuthKind::UserAccessToken,
     ];
 
     let auth_labels: Vec<_> = auth_kinds
         .iter()
         .map(|kind| match kind {
-            AuthKind::None => "No authentication",
-            AuthKind::Basic => "Basic HTTP authentication (username:password)",
-            AuthKind::PersonalToken => "Authenticate using a Github personal access token",
-            AuthKind::App => "Authenticate as a Github App",
-            AuthKind::OAuth => "Authenticate as a Github OAuth App",
-            AuthKind::UserAccessToken => "Authenticate using a User Access Token",
+            AuthKind::None => "No authentication (public API only, rate limited)",
+            AuthKind::Basic => "Basic authentication - username:password (deprecated by GitHub)",
+            AuthKind::PersonalToken => {
+                "Personal access token (recommended - set GITHUB_TOKEN env var to skip this prompt)"
+            }
+            AuthKind::App => "GitHub App authentication (for app developers)",
+            AuthKind::OAuth => "OAuth token (for OAuth apps)",
+            AuthKind::UserAccessToken => "User access token (fine-grained PAT)",
         })
         .collect();
 
-    let authentication = Select::new("Authenticate?", auth_labels.clone()).prompt()?;
+    let authentication =
+        Select::new("Choose GitHub authentication method:", auth_labels.clone()).prompt()?;
 
     let index = auth_labels
         .into_iter()
