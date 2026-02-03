@@ -94,9 +94,9 @@ pub async fn skip_pull_requests(
         );
 
         if config.dry_run {
-            command.spawn().and_then(|mut child| child.wait())?;
-        } else {
             println!("{program} {formatted_args}");
+        } else {
+            command.spawn().and_then(|mut child| child.wait())?;
         }
     }
 
