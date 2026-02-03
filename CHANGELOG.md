@@ -47,6 +47,7 @@ Please make sure to add your changes to the appropriate categories:
 - Removed duplicate log message in bisect command.
 - Replaced panic-prone unwraps with proper error handling in "git.rs".
 - Improved error handling by logging warnings and replacing panics with proper error propagation.
+- Simplified error messages in "github.rs" by removing redundant format parameters.
 
 ### Performance
 
