@@ -1,12 +1,10 @@
-use std::{path::PathBuf, process::ExitStatus, str::FromStr};
+use std::process::ExitStatus;
 
 use clap::{Parser, Subcommand};
-use git2::{Remote as GitRemote, Repository as GitRepository};
 use git_assist::{
-    command::bisect::{skip_pull_requests, SkipPullRequestsConfig},
-    host::{GitHost, GitRepositoryUrl, GithubApi, SupportedHost},
+    command::bisect::{skip_pull_requests, SkipPullRequestsConfigBuilder},
+    host::{GitHost, GithubApi, SupportedHost},
 };
-use inquire::{Select, Text};
 
 use super::CommonOptions;
 
@@ -43,101 +41,20 @@ pub(crate) struct SkipPullRequestsCommand {
     pub(crate) common: CommonOptions,
 }
 
-enum RepositoryUrlChoice<'a> {
-    Remote(&'a GitRemote<'a>),
-    Custom,
-}
-
-impl std::fmt::Display for RepositoryUrlChoice<'_> {
-    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        match self {
-            RepositoryUrlChoice::Remote(remote) => {
-                let url = remote.url().unwrap_or_default();
-
-                write!(f, "{url}")
-            }
-            RepositoryUrlChoice::Custom => {
-                write!(f, "Custom url ...")
-            }
-        }
-    }
-}
-
 impl SkipPullRequestsCommand {
     pub async fn run(&self) -> anyhow::Result<ExitStatus> {
-        let config = self.as_config()?;
+        let config = SkipPullRequestsConfigBuilder::new()
+            .remote_url(self.remote_url.clone())
+            .directory(self.directory.clone())
+            .good(self.good.clone())
+            .bad(self.bad.clone())
+            .dry_run(self.dry_run)
+            .build()?;
 
         let host: Box<dyn GitHost> = match SupportedHost::try_from(&config.repository.parsed_url)? {
             SupportedHost::Github => Box::new(GithubApi::authenticated()?),
         };
 
         skip_pull_requests(&*host, &config).await
-    }
-
-    fn as_config(&self) -> anyhow::Result<SkipPullRequestsConfig> {
-        let directory = match &self.directory {
-            Some(directory) => PathBuf::from(shellexpand::tilde(directory).as_ref()),
-            None => std::env::current_dir()?,
-        };
-
-        let repository = GitRepository::open(&directory)?;
-
-        let remotes: Vec<GitRemote<'_>> = repository
-            .remotes()?
-            .into_iter()
-            .filter_map(|name| {
-                name.and_then(|name| match repository.find_remote(name) {
-                    Ok(remote) => Some(remote),
-                    Err(err) => {
-                        eprintln!("Warning: Failed to find remote '{name}': {err}");
-                        None
-                    }
-                })
-            })
-            .collect();
-
-        let url = match &self.remote_url {
-            Some(repository_url) => repository_url.to_owned(),
-            None => {
-                let mut choices: Vec<_> = remotes.iter().map(RepositoryUrlChoice::Remote).collect();
-                choices.push(RepositoryUrlChoice::Custom);
-
-                let choice = Select::new("Remote url:", choices).prompt()?;
-
-                match choice {
-                    RepositoryUrlChoice::Remote(remote) => remote
-                        .url()
-                        .ok_or_else(|| anyhow::anyhow!("Remote has no URL configured"))?
-                        .to_owned(),
-                    RepositoryUrlChoice::Custom => Text::new("Remote url:").prompt()?,
-                }
-            }
-        };
-
-        let repository = GitRepositoryUrl::from_str(&url)?;
-
-        let good: String = match &self.good {
-            Some(good) => good.to_owned(),
-            None => Text::new("Known good commit:").prompt()?,
-        }
-        .trim()
-        .to_owned();
-
-        let bad: String = match &self.bad {
-            Some(bad) => bad.to_owned(),
-            None => Text::new("Known bad commit:").prompt()?,
-        }
-        .trim()
-        .to_owned();
-
-        let dry_run = self.dry_run;
-
-        Ok(SkipPullRequestsConfig {
-            repository,
-            directory,
-            good,
-            bad,
-            dry_run,
-        })
     }
 }
