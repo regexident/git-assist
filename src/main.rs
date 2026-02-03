@@ -16,7 +16,7 @@ mod args;
 // is the PR’s merge commit), before providing git `bisect good <REV>`/`git bisect bad <REV>`.
 // After that it will automatically skip internal commits while
 
-#[tokio::main]
+#[tokio::main(flavor = "current_thread")]
 async fn main() -> anyhow::Result<()> {
     let args = Args::parse();
 
