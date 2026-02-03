@@ -55,10 +55,10 @@ impl TryFrom<GitRepositoryUrl> for GithubRepository {
         match repository.parsed_url.host() {
             Some(GITHUB_HOST) => {}
             Some(_) => {
-                anyhow::bail!("Not a Github url: {url:?}", url = url.to_string());
+                anyhow::bail!("Not a Github url: {url}");
             }
             None => {
-                anyhow::bail!("Not host found in url: {url:?}", url = url.to_string());
+                anyhow::bail!("No host found in url: {url}");
             }
         }
 
