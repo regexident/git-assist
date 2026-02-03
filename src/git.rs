@@ -11,10 +11,10 @@ pub(crate) fn commits_of_branch(
 
     revwalk.simplify_first_parent()?;
 
-    Ok(revwalk
+    revwalk
         .flatten()
-        .map(|oid| repository.find_commit(oid).unwrap())
-        .collect())
+        .map(|oid| repository.find_commit(oid))
+        .collect()
 }
 
 pub(crate) fn commits_in_range(
@@ -28,8 +28,8 @@ pub(crate) fn commits_in_range(
 
     revwalk.simplify_first_parent()?;
 
-    Ok(revwalk
+    revwalk
         .flatten()
-        .map(|oid| repository.find_commit(oid).unwrap())
-        .collect())
+        .map(|oid| repository.find_commit(oid))
+        .collect()
 }
