@@ -70,8 +70,6 @@ pub async fn skip_pull_requests(
         std::env::set_current_dir(&config.directory)?;
     }
 
-    eprintln!("Entering repository directory ...");
-
     for pull_request in pull_requests {
         let program = "git";
         let mut command = Command::new(program);

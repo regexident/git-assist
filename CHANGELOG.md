@@ -44,6 +44,7 @@ Please make sure to add your changes to the appropriate categories:
 ### Fixed
 
 - Fixed inverted dry-run logic in bisect command.
+- Removed duplicate log message in bisect command.
 
 ### Performance
 
