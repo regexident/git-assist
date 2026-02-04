@@ -38,6 +38,7 @@ time = ">=0.3.41" # Required for chrono/jsonwebtoken compatibility
 serde = ">=1.0.185" # Required for octocrab and related crates
 openssl = ">=0.10.72" # Older versions have build script failures
 getset = ">=0.1.6" # Required for git-url-parse compatibility
+curve25519-dalek = ">=4.1.3" # 4.0.0 uses removed `stdsimd` nightly feature
 
 [features]
 default = ["github"]
