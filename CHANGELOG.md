@@ -25,8 +25,23 @@ Please make sure to add your changes to the appropriate categories:
 ### Changed
 
 - Updated dependencies:
+  - `anyhow` from `1.0.100` -> `1.0.104`
+  - `async-trait` from `0.1.89` -> `0.1.91`
+  - `clap` from `4.5.57` -> `4.6.5`
+  - `getset` from `0.1.6` -> `0.1.7`
+  - `git2` from `0.20.1` -> `0.21.0`
+  - `inquire` from `0.9.2` -> `0.9.4`
   - `jsonwebtoken` from `9.3.1` -> `10.0.0`
+  - `jsonwebtoken` from `10.3.0` -> `10.4.0`
+  - `num-bigint` from `0.4.6` -> `0.5.1`
   - `octocrab` from `0.47.0` -> `0.49.0`
+  - `octocrab` from `0.49.0` -> `0.54.0`
+  - `openssl` from `0.10.75` -> `0.10.81`
+  - `serde` from `1.0.228` -> `1.0.229`
+  - `shellexpand` from `3.1.1` -> `3.1.2`
+  - `thiserror` from `2.0.18` -> `2.0.19`
+  - `time` from `0.3.46` -> `0.3.55`
+  - `tokio` from `1.49.0` -> `1.53.1`
 - Bumped MSRV from `1.88.0` to `1.91.0`
 
 ### Deprecated
