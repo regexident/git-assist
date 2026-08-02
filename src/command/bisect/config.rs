@@ -89,14 +89,14 @@ impl SkipPullRequestsConfigBuilder {
         let remotes: Vec<GitRemote<'_>> = repository_handle
             .remotes()?
             .into_iter()
-            .filter_map(|name| {
-                name.and_then(|name| match repository_handle.find_remote(name) {
-                    Ok(remote) => Some(remote),
-                    Err(err) => {
-                        eprintln!("Warning: Failed to find remote '{name}': {err}");
-                        None
-                    }
-                })
+            .filter_map(Result::ok)
+            .flatten()
+            .filter_map(|name| match repository_handle.find_remote(name) {
+                Ok(remote) => Some(remote),
+                Err(err) => {
+                    eprintln!("Warning: Failed to find remote '{name}': {err}");
+                    None
+                }
             })
             .collect();
 
@@ -111,6 +111,8 @@ impl SkipPullRequestsConfigBuilder {
                 match choice {
                     RepositoryUrlChoice::Remote(remote) => remote
                         .url()
+                        .ok()
+                        .filter(|url| !url.is_empty())
                         .ok_or_else(|| anyhow::anyhow!("Remote has no URL configured"))?
                         .to_owned(),
                     RepositoryUrlChoice::Custom => Text::new("Remote url:").prompt()?,
