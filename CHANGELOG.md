@@ -27,7 +27,7 @@ Please make sure to add your changes to the appropriate categories:
 - Updated dependencies:
   - `jsonwebtoken` from `9.3.1` -> `10.0.0`
   - `octocrab` from `0.47.0` -> `0.49.0`
-- Bumped MSRV from `1.85.0` to `1.88.0`
+- Bumped MSRV from `1.88.0` to `1.91.0`
 
 ### Deprecated
 
